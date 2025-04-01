@@ -3,29 +3,36 @@
   <head>
     <meta charset="UTF-8" />
     <title>Log In</title>
+    <link rel="stylesheet" href="/styles.css" />
   </head>
   <body>
-    <% if (locals.user) {%>
-    <h1>Welcome back <%= `${user.first_name} ${user.last_name}` %></h1>
-    <a href="/log-out">Log out</a>
-    <% } else { %>
-    <h1>Log in</h1>
-    <form action="/log-in" method="POST">
-      <label for="username">Email</label>
-      <input id="username" name="username" type="text" />
-      <label for="password">Password</label>
-      <input id="password" name="password" type="password" />
-      <button type="submit">Log In</button>
-    </form>
-    <% if (locals.errors) {%>
-    <ul>
-      <% errors.forEach(function(error) { %>
-      <li><%= error%></li>
-      <% }); %>
-    </ul>
-    <% } %>
-
-    <a href="/sign-up">Sign up</a>
-    <%}%>
+    <div class="wrapper">
+      <%- include('header') %>
+      <main>
+        <% if (locals.user) {%>
+        <h1>Welcome back <%= `${user.first_name} ${user.last_name}` %></h1>
+        <a href="/log-out">Log out</a>
+        <% } else { %>
+        <h1>Log in</h1>
+        <form action="/log-in" method="POST">
+          <label for="username">Email</label>
+          <input id="username" name="username" type="text" required />
+          <label for="password">Password</label>
+          <input id="password" name="password" type="password" required />
+          <button type="submit">Log In</button>
+        </form>
+        <% if (locals.errors) {%>
+        <ul>
+          <% errors.forEach(function(error) { %>
+          <li><%= error%></li>
+          <% }); %>
+        </ul>
+        <% } %>
+        <a href="/">Go back</a>
+        <a href="/sign-up">Sign up</a>
+        <%}%>
+      </main>
+      <%- include('footer') %>
+    </div>
   </body>
 </html>

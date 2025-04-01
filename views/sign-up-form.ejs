@@ -3,22 +3,35 @@
   <head>
     <meta charset="UTF-8" />
     <title>Sign Up</title>
+    <link rel="stylesheet" href="/styles.css" />
   </head>
   <body>
-    <h1>Sign Up</h1>
-    <form action="/sign-up" method="POST">
-      <label for="firstName">First name</label>
-      <input type="text" name="firstName" id="firstName" />
-      <label for="lastName">Last name</label>
-      <input type="text" name="lastName" id="lastName" />
-      <label for="email">Email</label>
-      <input id="email" name="email" type="email" />
-      <label for="password">Password</label>
-      <input id="password" name="password" type="password" />
-      <label for="confirmPassword">Confirm password</label>
-      <input id="confirmPassword" name="confirmPassword" type="password" />
-      <button type="submit">Sign Up</button>
-    </form>
-    <%- include("partials/errors.ejs") %>
+    <div class="wrapper">
+      <%- include('header') %>
+      <main>
+        <h1>Sign Up</h1>
+        <form action="/sign-up" method="POST">
+          <label for="firstName">First name</label>
+          <input type="text" name="firstName" id="firstName" required />
+          <label for="lastName">Last name</label>
+          <input type="text" name="lastName" id="lastName" required />
+          <label for="email">Email</label>
+          <input id="email" name="email" type="email" required />
+          <label for="password">Password</label>
+          <input id="password" name="password" type="password" required />
+          <label for="confirmPassword">Confirm password</label>
+          <input
+            id="confirmPassword"
+            name="confirmPassword"
+            type="password"
+            required
+          />
+          <button type="submit">Sign Up</button>
+        </form>
+        <%- include("partials/errors.ejs") %>
+        <a href="/log-in">Go back</a>
+      </main>
+      <%- include('footer') %>
+    </div>
   </body>
 </html>

@@ -3,35 +3,44 @@
   <head>
     <meta charset="UTF-8" />
     <title>Members only</title>
-    <link rel="stylesheet" href="/style.css" />
+    <link rel="stylesheet" href="/styles.css" />
   </head>
   <body>
-    Members only
-    <main>
-      <% if(locals.user) { %>
-      <form action="/new" method="post">
-        <label for="postContent">What's on your mind?</label>
-        <textarea
-          name="postContent"
-          id="postContent"
-          maxlength="280"
-        ></textarea>
-        <button type="submit">Post</button>
-      </form>
-      <a href="log-out">Log out</a>
-      <%} else {%>
-      <a href="/log-in">Log in</a>
-      <%}%> <%- include("partials/errors.ejs") %> <%
-      posts.forEach(function(post) { %>
-      <article>
-        <% if(locals.user) { %>
-        <h3><%= `${post.first_name} ${post.last_name}`%></h3>
-        <% } else {%>
-        <h3>[REDACTED]</h3>
-        <% } %>
-        <p><%= post.content %></p>
-      </article>
-      <% }); %>
-    </main>
+    <div class="wrapper">
+      <%- include('header') %>
+      <main>
+        <section class="posts">
+          <% if(locals.user) { %>
+          <form action="/new" method="post" class="post-form">
+            <label for="postContent">New post</label>
+            <textarea
+              name="postContent"
+              id="postContent"
+              maxlength="255"
+              required
+            ></textarea>
+            <button type="submit">Post</button>
+          </form>
+
+          <%} %> <%- include("partials/errors.ejs") %> <%
+          posts.forEach(function(post) { %>
+          <article class="post">
+            <% if(locals.user) { %>
+            <h3><%= `${post.first_name} ${post.last_name}`%></h3>
+            <% } else {%>
+            <h3>[REDACTED]</h3>
+            <% } %>
+            <p><%= post.content %></p>
+            <% if(locals.user) { %>
+            <p><%= `Posted on: ${post.post_date.toLocaleString()}`%></p>
+            <% } else {%>
+            <p>Posted on: [REDACTED]</p>
+            <% } %>
+          </article>
+          <% }); %>
+        </section>
+      </main>
+      <%- include('footer') %>
+    </div>
   </body>
 </html>
