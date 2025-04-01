@@ -18,7 +18,14 @@ const validateSignUp = [
   body("email")
     .trim()
     .isEmail()
-    .withMessage("Email must be a valid email address"),
+    .withMessage("Email must be a valid email address")
+    .custom(async (value) => {
+      const user = await db.getUserByEmail(value);
+      if (user) {
+        throw new Error("Email is already taken");
+      }
+      return true;
+    }),
   body("password")
     .trim()
     .custom((value, { req }) => {
