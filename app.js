@@ -4,6 +4,8 @@ const path = require("node:path");
 const session = require("express-session");
 const passport = require("./passportConfig.js");
 const indexRouter = require("./routes/indexRouter.js");
+const pgPool = require("./db/pool.js");
+const pgSession = require("connect-pg-simple")(session);
 
 const bcrypt = require("bcryptjs");
 require("dotenv").config();
@@ -14,11 +16,16 @@ app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 app.use(
   session({
+    store: new pgSession({
+      pool: pgPool,
+      tableName: "user_sessions",
+      createTableIfMissing: true,
+    }),
     secret: process.env.SECRET,
     resave: false,
     saveUninitialized: false,
     cookie: {
-      maxAge: 1000 * 60 * 60 * 24 * 3, // 3 days
+      maxAge: 1000 * 60 * 60 * 24 * 30, // 30 days
     },
   })
 );
