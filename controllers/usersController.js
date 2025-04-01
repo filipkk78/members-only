@@ -28,6 +28,13 @@ const validateSignUp = [
 exports.signUp = [
   validateSignUp,
   async (req, res, next) => {
+    const errors = validationResult(req);
+    if (!errors.isEmpty()) {
+      res.set("Content-Type", "text/html");
+      return res.status(400).render("sign-up-form", {
+        errors: errors.array(),
+      });
+    }
     try {
       const { firstName, lastName, email, password } = req.body;
       const hashedPassword = await bcrypt.hash(password, 10);
