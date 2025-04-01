@@ -1,15 +1,18 @@
 const { Router } = require("express");
 const bcrypt = require("bcryptjs");
 const indexRouter = Router();
-const passport = require("../passportConfig.js");
+const passport = require("../passportConfig");
 const db = require("../db/queries.js");
-const { signUp } = require("../controllers/usersController.js");
+const { signUp } = require("../controllers/usersController");
+const { getPosts } = require("../controllers/getPosts");
 
-indexRouter.get("/", (req, res) => {
+indexRouter.get("/log-in", (req, res) => {
   const messages = req.session.messages;
   req.session.messages = [];
-  res.render("index", { user: req.user, errors: messages });
+  res.render("log-in.ejs", { user: req.user, errors: messages });
 });
+
+indexRouter.post("/post", addPost);
 
 indexRouter.get("/sign-up", (req, res) => res.render("sign-up-form"));
 
@@ -19,7 +22,7 @@ indexRouter.post(
   "/log-in",
   passport.authenticate("local", {
     successRedirect: "/",
-    failureRedirect: "/",
+    failureRedirect: "/log-in",
     failureMessage: true,
   })
 );
@@ -32,5 +35,7 @@ indexRouter.get("/log-out", (req, res, next) => {
     res.redirect("/");
   });
 });
+
+indexRouter.get("/", getPosts);
 
 module.exports = indexRouter;
