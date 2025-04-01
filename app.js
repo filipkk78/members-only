@@ -2,7 +2,7 @@ const express = require("express");
 const app = express();
 const path = require("node:path");
 const session = require("express-session");
-const passport = require("passport");
+const passport = require("./passportConfig.js");
 const indexRouter = require("./routes/indexRouter.js");
 
 const bcrypt = require("bcryptjs");
@@ -27,9 +27,7 @@ app.use(passport.session());
 const assetsPath = path.join(__dirname, "public");
 app.use(express.static(assetsPath));
 
-app.use("/", (req, res) => {
-  res.send("hello");
-});
+app.use("/", indexRouter);
 
 const PORT = 3000;
 app.listen(PORT, () => {

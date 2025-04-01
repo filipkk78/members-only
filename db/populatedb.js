@@ -11,7 +11,7 @@ CREATE TABLE IF NOT EXISTS users (
     last_name VARCHAR (255),
     email VARCHAR (255),
     password VARCHAR (255),
-    status VARCHAR (255),
+    member boolean,
     admin boolean
 );
 

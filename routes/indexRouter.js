@@ -2,6 +2,8 @@ const { Router } = require("express");
 const bcrypt = require("bcryptjs");
 const indexRouter = Router();
 const passport = require("../passportConfig.js");
+const db = require("../db/queries.js");
+const { signUp } = require("../controllers/usersController.js");
 
 indexRouter.get("/", (req, res) => {
   res.render("index", { user: req.user });
@@ -9,19 +11,7 @@ indexRouter.get("/", (req, res) => {
 
 indexRouter.get("/sign-up", (req, res) => res.render("sign-up-form"));
 
-indexRouter.post("/sign-up", async (req, res, next) => {
-  try {
-    const hashedPassword = await bcrypt.hash(req.body.password, 10);
-    await pool.query("insert into users (username, password) values ($1, $2)", [
-      req.body.username,
-      hashedPassword,
-    ]);
-    res.redirect("/");
-  } catch (error) {
-    console.error(error);
-    next(error);
-  }
-});
+indexRouter.post("/sign-up", signUp);
 
 indexRouter.post(
   "/log-in",
