@@ -18,11 +18,19 @@
         ></textarea>
         <button type="submit">Post</button>
       </form>
+      <a href="log-out">Log out</a>
       <%} else {%>
       <a href="/log-in">Log in</a>
       <%}%> <%- include("partials/errors.ejs") %> <%
       posts.forEach(function(post) { %>
-      <article><%= post.content%></article>
+      <article>
+        <% if(locals.user) { %>
+        <h3><%= `${post.first_name} ${post.last_name}`%></h3>
+        <% } else {%>
+        <h3>[REDACTED]</h3>
+        <% } %>
+        <p><%= post.content %></p>
+      </article>
       <% }); %>
     </main>
   </body>

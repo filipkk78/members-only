@@ -1,7 +1,9 @@
 const pool = require("./pool");
 
 async function getAllPosts() {
-  const { rows } = await pool.query("SELECT * FROM posts");
+  const { rows } = await pool.query(
+    "SELECT posts.user_id, posts.content, users.first_name, users.last_name FROM posts JOIN users ON users.id = posts.user_id "
+  );
   return rows;
 }
 
