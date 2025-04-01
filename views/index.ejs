@@ -6,10 +6,10 @@
   </head>
   <body>
     <% if (locals.user) {%>
-    <h1>WELCOME BACK <%= user.email %></h1>
-    <a href="/log-out">LOG OUT</a>
+    <h1>Welcome back <%= `${user.first_name} ${user.last_name}` %></h1>
+    <a href="/log-out">Log out</a>
     <% } else { %>
-    <h1>please log in</h1>
+    <h1>Log in</h1>
     <form action="/log-in" method="POST">
       <label for="username">Username</label>
       <input id="username" name="username" placeholder="username" type="text" />

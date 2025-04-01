@@ -21,8 +21,12 @@ const validateSignUp = [
     .withMessage("Email must be a valid email address"),
   body("password")
     .trim()
-    .equals(body("confirmPassword"))
-    .withMessage("Passwords must match"),
+    .custom((value, { req }) => {
+      if (value !== req.body.confirmPassword) {
+        throw new Error("Passwords must match");
+      }
+      return true;
+    }),
 ];
 
 exports.signUp = [
