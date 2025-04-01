@@ -6,7 +6,9 @@ const db = require("../db/queries.js");
 const { signUp } = require("../controllers/usersController.js");
 
 indexRouter.get("/", (req, res) => {
-  res.render("index", { user: req.user });
+  const messages = req.session.messages;
+  req.session.messages = [];
+  res.render("index", { user: req.user, errors: messages });
 });
 
 indexRouter.get("/sign-up", (req, res) => res.render("sign-up-form"));
@@ -18,6 +20,7 @@ indexRouter.post(
   passport.authenticate("local", {
     successRedirect: "/",
     failureRedirect: "/",
+    failureMessage: true,
   })
 );
 

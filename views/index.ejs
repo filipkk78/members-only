@@ -17,6 +17,14 @@
       <input id="password" name="password" type="password" />
       <button type="submit">Log In</button>
     </form>
+    <% if (locals.errors) {%>
+    <ul>
+      <% errors.forEach(function(error) { %>
+      <li><%= error%></li>
+      <% }); %>
+    </ul>
+    <% } %>
+
     <a href="/sign-up">Sign up</a>
     <%}%>
   </body>
