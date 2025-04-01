@@ -26,9 +26,17 @@ async function getUserById(userId) {
   return rows[0];
 }
 
+async function newPost(content, userId) {
+  await pool.query("INSERT INTO posts (content, user_id) VALUES ($1, $2)", [
+    content,
+    userId,
+  ]);
+}
+
 module.exports = {
   getAllPosts,
   signUp,
   getUserByEmail,
   getUserById,
+  newPost,
 };

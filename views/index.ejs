@@ -3,13 +3,13 @@
   <head>
     <meta charset="UTF-8" />
     <title>Members only</title>
-    <link rel="stylesheet" href="/styles.css" />
+    <link rel="stylesheet" href="/style.css" />
   </head>
   <body>
     Members only
     <main>
       <% if(locals.user) { %>
-      <form action="/post">
+      <form action="/new" method="post">
         <label for="postContent">What's on your mind?</label>
         <textarea
           name="postContent"
@@ -20,8 +20,10 @@
       </form>
       <%} else {%>
       <a href="/log-in">Log in</a>
-      <%}%> <% posts.forEach(function(post) { %>
-      <article><%= post%></article>
+      <%}%> <%- include("partials/errors.ejs") %> <%
+      posts.forEach(function(post) { %>
+      <article><%= post.content%></article>
+      <% }); %>
     </main>
   </body>
 </html>

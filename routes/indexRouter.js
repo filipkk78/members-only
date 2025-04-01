@@ -5,6 +5,7 @@ const passport = require("../passportConfig");
 const db = require("../db/queries.js");
 const { signUp } = require("../controllers/usersController");
 const { getPosts } = require("../controllers/getPosts");
+const { addPost } = require("../controllers/addPost.js");
 
 indexRouter.get("/log-in", (req, res) => {
   const messages = req.session.messages;
@@ -12,7 +13,7 @@ indexRouter.get("/log-in", (req, res) => {
   res.render("log-in.ejs", { user: req.user, errors: messages });
 });
 
-indexRouter.post("/post", addPost);
+indexRouter.post("/new", addPost);
 
 indexRouter.get("/sign-up", (req, res) => res.render("sign-up-form"));
 
