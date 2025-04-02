@@ -4,11 +4,12 @@
     <meta charset="UTF-8" />
     <title>Members only</title>
     <link rel="stylesheet" href="/styles.css" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
   </head>
   <body>
     <div class="wrapper">
       <%- include('header') %>
-      <main>
+      <main class="index-main">
         <section class="posts">
           <% if(locals.user) { %>
           <form action="/new" method="post" class="post-form">
@@ -22,47 +23,48 @@
             <button type="submit">Post</button>
           </form>
           <%} else {%>
-          <p>You must create an account to add new posts.</p>
+          <h2>You must create an account and log in to add new posts.</h2>
           <% } %> <%- include("partials/errors.ejs") %> <%
           posts.forEach(function(post) { %>
           <article class="post">
             <% if(locals.user) { if(locals.user.member && !locals.user.admin){
             %>
             <h3><%= `${post.first_name} ${post.last_name}`%></h3>
-            <% } else if(locals.user.admin){ %>
-            <div class="post-header">
-              <h3><%= `${post.first_name} ${post.last_name}`%></h3>
-              <form action="<%=`/delete/${post.id}`%>" method="post">
-                <button type="submit" class="delete-btn">
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    width="16"
-                    height="16"
-                    fill="red"
-                    class="bi bi-trash"
-                    viewBox="0 0 16 16"
-                  >
-                    <path
-                      d="M5.5 5.5A.5.5 0 0 1 6 6v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5m2.5 0a.5.5 0 0 1 .5.5v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5m3 .5a.5.5 0 0 0-1 0v6a.5.5 0 0 0 1 0z"
-                    />
-                    <path
-                      d="M14.5 3a1 1 0 0 1-1 1H13v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V4h-.5a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1H6a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1h3.5a1 1 0 0 1 1 1zM4.118 4 4 4.059V13a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V4.059L11.882 4zM2.5 3h11V2h-11z"
-                    />
-                  </svg>
-                </button>
-              </form>
-            </div>
             <% } else if(locals.user) if(!locals.user.member) {%>
             <h3>[REDACTED]</h3>
             <%}} else {%>
             <h3>[REDACTED]</h3>
             <% } %>
             <p><%= post.content %></p>
-            <% if(locals.user) if(locals.user.member){ %>
+            <% if(locals.user) { if(locals.user.member){ %>
             <p><%= `Posted on: ${post.post_date.toLocaleString()}`%></p>
-            <% } else {%>
+            <% }} else {%>
             <p>Posted on: [REDACTED]</p>
-            <% } %>
+            <% } %> <% if(locals.user) if(locals.user.admin) {%>
+            <form
+              action="<%=`/delete/${post.id}`%>"
+              method="post"
+              class="delete-post-form"
+            >
+              <button type="submit" class="delete-btn">
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="16"
+                  height="16"
+                  fill="red"
+                  class="bi bi-trash"
+                  viewBox="0 0 16 16"
+                >
+                  <path
+                    d="M5.5 5.5A.5.5 0 0 1 6 6v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5m2.5 0a.5.5 0 0 1 .5.5v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5m3 .5a.5.5 0 0 0-1 0v6a.5.5 0 0 0 1 0z"
+                  />
+                  <path
+                    d="M14.5 3a1 1 0 0 1-1 1H13v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V4h-.5a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1H6a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1h3.5a1 1 0 0 1 1 1zM4.118 4 4 4.059V13a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V4.059L11.882 4zM2.5 3h11V2h-11z"
+                  />
+                </svg>
+              </button>
+            </form>
+            <% }%>
           </article>
           <% }); %>
         </section>

@@ -61,7 +61,6 @@ footer {
   align-items: center;
   padding: 1em;
   background-color: var(--accents);
-  font-size: 1.2rem;
 }
 
 .wrapper {
@@ -69,6 +68,7 @@ footer {
   display: grid;
   grid-template-rows: auto 1fr auto;
   grid-template-columns: minmax(0, 1fr);
+  font-size: 1rem;
 }
 
 header {
@@ -76,7 +76,6 @@ header {
   padding: 1em;
   background-color: var(--accents);
   height: 4rem;
-  font-size: 1.3rem;
 }
 
 header nav {
@@ -86,7 +85,7 @@ header nav {
   justify-content: space-evenly;
   align-items: center;
   gap: 10px;
-  font-size: 2rem;
+  font-size: 1.5rem;
 }
 
 a {
@@ -101,7 +100,7 @@ a:hover {
 .posts {
   display: grid;
   grid-template-rows: auto;
-  gap: 1rem;
+  grid-template-columns: 1fr;
   justify-content: center;
   gap: 1em;
   font-size: 1.2rem;
@@ -116,7 +115,6 @@ a:hover {
   box-shadow: 0px 0px 16px 2px black;
   padding: 1em;
   word-break: break-word;
-  width: 68ch;
 }
 
 textarea {
@@ -127,6 +125,7 @@ textarea {
   padding: 0.5em;
   color: white;
   resize: none;
+  font-size: 1rem;
 }
 
 .post-form {
@@ -177,4 +176,70 @@ textarea {
 
 .delete-btn:hover {
   scale: 1.2;
+}
+
+.user-form-main {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  height: 100%;
+  width: 100%;
+}
+
+.user-form {
+  display: grid;
+  justify-content: center;
+  align-items: center;
+  width: 40ch;
+  gap: 0.5em;
+  grid-template-columns: 1fr;
+}
+
+.req {
+  color: red;
+}
+
+.user-form label {
+  padding: 0.2em;
+}
+
+.user-form input {
+  border: 3px solid rgb(255, 255, 255);
+  border-radius: 5px;
+  background-color: transparent;
+  height: 2rem;
+  padding: 0.5em;
+  color: white;
+}
+
+.user-form button {
+  background-color: white;
+  border: 3px solid rgb(255, 255, 255);
+  border-radius: 5px;
+  height: 2rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 0.5rem;
+}
+
+.index-main {
+  padding: 2em 20%;
+}
+
+.delete-post-form {
+  align-self: flex-end;
+}
+
+@media (max-width: 1100px) {
+  .index-main {
+    padding: 2em 15%;
+  }
+}
+
+@media (max-width: 800px) {
+  .index-main {
+    padding: 2em 2em;
+  }
 }

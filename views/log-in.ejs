@@ -4,20 +4,21 @@
     <meta charset="UTF-8" />
     <title>Log In</title>
     <link rel="stylesheet" href="/styles.css" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
   </head>
   <body>
     <div class="wrapper">
       <%- include('header') %>
-      <main>
+      <main class="user-form-main">
         <% if (locals.user) {%>
         <h1>Welcome back <%= `${user.first_name} ${user.last_name}` %></h1>
         <a href="/log-out">Log out</a>
         <% } else { %>
         <h1>Log in</h1>
-        <form action="/log-in" method="POST">
-          <label for="username">Email</label>
+        <form action="/log-in" method="POST" class="user-form">
+          <label for="username">Email <span class="req">*</span></label>
           <input id="username" name="username" type="text" required />
-          <label for="password">Password</label>
+          <label for="password">Password <span class="req">*</span></label>
           <input id="password" name="password" type="password" required />
           <button type="submit">Log In</button>
         </form>

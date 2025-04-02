@@ -1,7 +1,7 @@
 <% if(locals.user) { %>
 <header>
   <nav>
-    <a href="/"><h1>Members Only</h1></a>
+    <a href="/">Members Only</a>
     <%if(!locals.user.member) { %>
     <a href="get-membership">Get membership</a>
     <%} %> <%if(locals.user.member )if(!locals.user.admin) { %>
@@ -13,7 +13,7 @@
 <% } else {%>
 <header>
   <nav>
-    <a href="/"><h1>Members Only</h1></a>
+    <a href="/">Members Only</a>
     <a href="/log-in">Log in</a>
     <a href="/sign-up">Sign up</a>
   </nav>

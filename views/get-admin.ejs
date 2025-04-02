@@ -2,21 +2,21 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <title>Log In</title>
+    <title>Get admin</title>
     <link rel="stylesheet" href="/styles.css" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
   </head>
   <body>
     <div class="wrapper">
       <%- include('header') %>
-      <main>
+      <main class="user-form-main">
         <% if (locals.user.admin) {%>
         <h1>
           <%= `You already are an admin, ${user.first_name} ${user.last_name}.`
           %>
         </h1>
         <% } else { %>
-
-        <form action="/get-admin" method="POST">
+        <form action="/get-admin" method="POST" class="user-form">
           <label for="passcode"
             ><h1>Enter the admin code to become an admin</h1></label
           >
