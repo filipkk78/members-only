@@ -21,11 +21,13 @@
             ></textarea>
             <button type="submit">Post</button>
           </form>
-
-          <%- include("partials/errors.ejs") %> <% posts.forEach(function(post)
-          { %>
+          <%} else {%>
+          <p>You must create an account to add new posts.</p>
+          <% } %> <%- include("partials/errors.ejs") %> <%
+          posts.forEach(function(post) { %>
           <article class="post">
-            <% if(locals.user.member && !locals.user.admin){ %>
+            <% if(locals.user) { if(locals.user.member && !locals.user.admin){
+            %>
             <h3><%= `${post.first_name} ${post.last_name}`%></h3>
             <% } else if(locals.user.admin){ %>
             <div class="post-header">
@@ -50,11 +52,13 @@
                 </button>
               </form>
             </div>
-            <% } else {%>
+            <% } else if(locals.user) if(!locals.user.member) {%>
+            <h3>[REDACTED]</h3>
+            <%}} else {%>
             <h3>[REDACTED]</h3>
             <% } %>
             <p><%= post.content %></p>
-            <% if(locals.user.member){ %>
+            <% if(locals.user) if(locals.user.member){ %>
             <p><%= `Posted on: ${post.post_date.toLocaleString()}`%></p>
             <% } else {%>
             <p>Posted on: [REDACTED]</p>
@@ -62,12 +66,6 @@
           </article>
           <% }); %>
         </section>
-        <%} else {%>
-        <p class="not-logged-in-message">
-          You must be create an account and log in to see posts. Only users with
-          membership status can see post authors and dates.
-        </p>
-        <% } %>
       </main>
       <%- include('footer') %>
     </div>
