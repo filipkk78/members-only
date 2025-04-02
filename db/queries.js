@@ -7,10 +7,10 @@ async function getAllPosts() {
   return rows;
 }
 
-async function signUp(firstName, lastName, email, pwd) {
+async function signUp(firstName, lastName, email, pwd, adminPwd) {
   await pool.query(
     "INSERT INTO users (first_name, last_name, email, password, member, admin) values ($1, $2, $3, $4, $5, $6)",
-    [firstName, lastName, email, pwd, false, false]
+    [firstName, lastName, email, pwd, false, adminPwd]
   );
 }
 
@@ -39,6 +39,10 @@ async function grantMembership(email) {
   await pool.query("UPDATE users SET member = true WHERE email = $1", [email]);
 }
 
+async function grantAdminPrivileges(email) {
+  await pool.query("UPDATE users SET admin = true WHERE email = $1", [email]);
+}
+
 module.exports = {
   getAllPosts,
   signUp,
@@ -46,4 +50,5 @@ module.exports = {
   getUserById,
   newPost,
   grantMembership,
+  grantAdminPrivileges,
 };

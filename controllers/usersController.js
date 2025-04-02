@@ -86,3 +86,31 @@ exports.grantMembership = [
     }
   },
 ];
+
+const validateAdminPassword = [
+  body("adminPassword")
+    .trim()
+    .equals(process.env.ADMIN_PWD)
+    .withMessage("Incorrect passcode"),
+];
+
+exports.grantAdminPrivileges = [
+  validateAdminPassword,
+  async (req, res, next) => {
+    const errors = validationResult(req);
+    if (!errors.isEmpty()) {
+      res.set("Content-Type", "text/html");
+      return res.status(400).render("get-membership", {
+        errors: errors.array(),
+        user: req.user,
+      });
+    }
+    try {
+      await db.grantAdminPrivileges(req.user.email);
+      res.redirect("/");
+    } catch (error) {
+      console.error(error);
+      next(error);
+    }
+  },
+];

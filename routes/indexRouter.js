@@ -3,7 +3,11 @@ const bcrypt = require("bcryptjs");
 const indexRouter = Router();
 const passport = require("../passportConfig");
 const db = require("../db/queries.js");
-const { signUp, grantMembership } = require("../controllers/usersController");
+const {
+  signUp,
+  grantMembership,
+  grantAdminPrivileges,
+} = require("../controllers/usersController");
 const { getPosts } = require("../controllers/getPosts");
 const { addPost } = require("../controllers/addPost.js");
 
@@ -18,6 +22,12 @@ indexRouter.get("/get-membership", (req, res) =>
 );
 
 indexRouter.post("/get-membership", grantMembership);
+
+indexRouter.get("/get-admin", (req, res) =>
+  res.render("get-admin", { user: req.user })
+);
+
+indexRouter.post("/get-admin", grantAdminPrivileges);
 
 indexRouter.post("/new", addPost);
 

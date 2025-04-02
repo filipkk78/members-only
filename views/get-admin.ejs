@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Log In</title>
+    <link rel="stylesheet" href="/styles.css" />
+  </head>
+  <body>
+    <div class="wrapper">
+      <%- include('header') %>
+      <main>
+        <% if (locals.user.admin) {%>
+        <h1>
+          <%= `You already are an admin, ${user.first_name} ${user.last_name}.`
+          %>
+        </h1>
+        <% } else { %>
+
+        <form action="/get-admin" method="POST">
+          <label for="passcode"
+            ><h1>Enter the admin code to become an admin</h1></label
+          >
+          <input
+            id="adminPassword"
+            name="adminPassword"
+            type="password"
+            required
+          />
+          <button type="submit">Submit</button>
+        </form>
+        <%- include("partials/errors.ejs") %> <% }%>
+      </main>
+      <%- include('footer') %>
+    </div>
+  </body>
+</html>
