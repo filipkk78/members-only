@@ -9,7 +9,7 @@ async function getAllPosts() {
 
 async function signUp(firstName, lastName, email, pwd, adminPwd) {
   await pool.query(
-    "INSERT INTO users (first_name, last_name, email, password, member, admin) values ($1, $2, $3, $4, $5, $6)",
+    "INSERT INTO users (first_name, last_name, email, password, member, admin) VALUES ($1, $2, $3, $4, $5, $6)",
     [firstName, lastName, email, pwd, false, adminPwd]
   );
 }
