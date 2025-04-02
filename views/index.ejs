@@ -38,9 +38,11 @@
             <p><%= post.content %></p>
             <% if(locals.user) { if(locals.user.member){ %>
             <p><%= `Posted on: ${post.post_date.toLocaleString()}`%></p>
-            <% }} else {%>
+            <% } else {%>
             <p>Posted on: [REDACTED]</p>
-            <% } %> <% if(locals.user) if(locals.user.admin) {%>
+            <% }} %> <% if(!locals.user) {%>
+            <p>Posted on: [REDACTED]</p>
+            <%}%> <% if(locals.user) if(locals.user.admin) {%>
             <form
               action="<%=`/delete/${post.id}`%>"
               method="post"
