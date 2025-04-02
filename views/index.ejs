@@ -27,8 +27,7 @@
           <% } %> <%- include("partials/errors.ejs") %> <%
           posts.forEach(function(post) { %>
           <article class="post">
-            <% if(locals.user) { if(locals.user.member && !locals.user.admin){
-            %>
+            <% if(locals.user) { if(locals.user.member){ %>
             <h3><%= `${post.first_name} ${post.last_name}`%></h3>
             <% } else if(locals.user) if(!locals.user.member) {%>
             <h3>[REDACTED]</h3>
