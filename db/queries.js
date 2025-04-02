@@ -2,7 +2,7 @@ const pool = require("./pool");
 
 async function getAllPosts() {
   const { rows } = await pool.query(
-    "SELECT posts.user_id, posts.content, posts.post_date, users.first_name, users.last_name FROM posts JOIN users ON users.id = posts.user_id ORDER BY posts.id DESC"
+    "SELECT posts.id, posts.user_id, posts.content, posts.post_date, users.first_name, users.last_name FROM posts JOIN users ON users.id = posts.user_id ORDER BY posts.id DESC"
   );
   return rows;
 }
@@ -43,6 +43,10 @@ async function grantAdminPrivileges(email) {
   await pool.query("UPDATE users SET admin = true WHERE email = $1", [email]);
 }
 
+async function deletePost(postId) {
+  await pool.query("DELETE FROM posts WHERE id = $1", [postId]);
+}
+
 module.exports = {
   getAllPosts,
   signUp,
@@ -51,4 +55,5 @@ module.exports = {
   newPost,
   grantMembership,
   grantAdminPrivileges,
+  deletePost,
 };

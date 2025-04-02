@@ -156,3 +156,25 @@ textarea {
   align-items: center;
   font-size: 2rem;
 }
+
+.post-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+}
+
+.delete-btn {
+  border: none;
+  background-color: transparent;
+}
+
+.delete-btn svg {
+  height: 1.3rem;
+  width: 1.3rem;
+  transition: scale;
+}
+
+.delete-btn:hover {
+  scale: 1.2;
+}

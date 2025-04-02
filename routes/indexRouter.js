@@ -10,6 +10,7 @@ const {
 } = require("../controllers/usersController");
 const { getPosts } = require("../controllers/getPosts");
 const { addPost } = require("../controllers/addPost.js");
+const { deletePost } = require("../controllers/deletePost.js");
 
 indexRouter.get("/log-in", (req, res) => {
   const messages = req.session.messages;
@@ -52,6 +53,8 @@ indexRouter.get("/log-out", (req, res, next) => {
     res.redirect("/");
   });
 });
+
+indexRouter.post("/delete/:post", deletePost);
 
 indexRouter.get("/", getPosts);
 
