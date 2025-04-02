@@ -22,16 +22,16 @@
             <button type="submit">Post</button>
           </form>
 
-          <%} %> <%- include("partials/errors.ejs") %> <%
-          posts.forEach(function(post) { %>
+          <%- include("partials/errors.ejs") %> <% posts.forEach(function(post)
+          { %>
           <article class="post">
-            <% if(locals.user) { %>
+            <% if(locals.user.member){ %>
             <h3><%= `${post.first_name} ${post.last_name}`%></h3>
             <% } else {%>
             <h3>[REDACTED]</h3>
             <% } %>
             <p><%= post.content %></p>
-            <% if(locals.user) { %>
+            <% if(locals.user.member){ %>
             <p><%= `Posted on: ${post.post_date.toLocaleString()}`%></p>
             <% } else {%>
             <p>Posted on: [REDACTED]</p>
@@ -39,6 +39,12 @@
           </article>
           <% }); %>
         </section>
+        <%} else {%>
+        <p class="not-logged-in-message">
+          You must be create an account and log in to see posts. Only users with
+          membership status can see post authors and dates.
+        </p>
+        <% } %>
       </main>
       <%- include('footer') %>
     </div>

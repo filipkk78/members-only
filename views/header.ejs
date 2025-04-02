@@ -1,12 +1,20 @@
 <% if(locals.user) { %>
 <header>
-  <h1>Members Only</h1>
-  <p><a href="/log-out">Log out</a></p>
+  <nav>
+    <a href="/"><h1>Members Only</h1></a>
+    <%if(!locals.user.member) { %>
+    <a href="get-membership">Get membership</a>
+    <%} %>
+    <a href="/log-out">Log out</a>
+  </nav>
 </header>
 <% } else {%>
 <header>
-  <h1>Members Only</h1>
-  <p><a href="/log-in">Log in</a></p>
+  <nav>
+    <a href="/"><h1>Members Only</h1></a>
+    <a href="/log-in">Log in</a>
+    <a href="/sign-up">Sign up</a>
+  </nav>
 </header>
 
 <% }%>

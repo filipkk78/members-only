@@ -45,4 +45,5 @@ module.exports = {
   getUserByEmail,
   getUserById,
   newPost,
+  grantMembership,
 };

@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Log In</title>
+    <link rel="stylesheet" href="/styles.css" />
+  </head>
+  <body>
+    <div class="wrapper">
+      <%- include('header') %>
+      <main>
+        <% if (locals.user.member) {%>
+        <h1>
+          <%= `You already are a member, ${user.first_name} ${user.last_name}.`
+          %>
+        </h1>
+        <% } else { %>
+
+        <form action="/get-membership" method="POST">
+          <label for="passcode"
+            ><h1>Enter the secret passcode to become a member</h1></label
+          >
+          <input id="passcode" name="passcode" type="password" required />
+          <button type="submit">Submit</button>
+        </form>
+        <%- include("partials/errors.ejs") %> <% }%>
+      </main>
+      <%- include('footer') %>
+    </div>
+  </body>
+</html>

@@ -73,12 +73,20 @@ footer {
 
 header {
   display: flex;
-  justify-content: space-around;
-  align-items: center;
   padding: 1em;
   background-color: var(--accents);
   height: 4rem;
   font-size: 1.3rem;
+}
+
+header nav {
+  height: 100%;
+  width: 100%;
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+  gap: 10px;
+  font-size: 2rem;
 }
 
 a {
@@ -96,6 +104,7 @@ a:hover {
   gap: 1rem;
   justify-content: center;
   gap: 1em;
+  font-size: 1.2rem;
 }
 
 .post {
@@ -103,12 +112,11 @@ a:hover {
   flex-direction: column;
   justify-content: space-around;
   border: 3px solid white;
-  border-radius: 20px;
-  box-shadow: 0px 0px 16px 4px black;
+  border-radius: 5px;
+  box-shadow: 0px 0px 16px 2px black;
   padding: 1em;
   word-break: break-word;
   width: 68ch;
-  font-size: 1.1rem;
 }
 
 textarea {
@@ -125,6 +133,7 @@ textarea {
   display: flex;
   flex-direction: column;
   gap: 0.5em;
+  font-size: 2rem;
 }
 
 .post-form button {
@@ -137,4 +146,13 @@ textarea {
 
 .post-form button:hover {
   border-color: aqua;
+}
+
+.not-logged-in-message {
+  height: 100%;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 2rem;
 }
