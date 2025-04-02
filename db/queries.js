@@ -2,7 +2,7 @@ const pool = require("./pool");
 
 async function getAllPosts() {
   const { rows } = await pool.query(
-    "SELECT posts.user_id, posts.content, posts.post_date, users.first_name, users.last_name FROM posts JOIN users ON users.id = posts.user_id "
+    "SELECT posts.user_id, posts.content, posts.post_date, users.first_name, users.last_name FROM posts JOIN users ON users.id = posts.user_id ORDER BY posts.id DESC"
   );
   return rows;
 }
@@ -10,7 +10,7 @@ async function getAllPosts() {
 async function signUp(firstName, lastName, email, pwd) {
   await pool.query(
     "INSERT INTO users (first_name, last_name, email, password, member, admin) values ($1, $2, $3, $4, $5, $6)",
-    [firstName, lastName, email, pwd, true, false]
+    [firstName, lastName, email, pwd, false, false]
   );
 }
 
@@ -33,6 +33,10 @@ async function newPost(content, userId) {
     "INSERT INTO posts (content, user_id, post_date) VALUES ($1, $2, $3)",
     [content, userId, new Date()]
   );
+}
+
+async function grantMembership(email) {
+  await pool.query("UPDATE users SET member = true WHERE email = $1", [email]);
 }
 
 module.exports = {
