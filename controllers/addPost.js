@@ -4,9 +4,7 @@ const { body, validationResult } = require("express-validator");
 const validateNewPost = [
   body("postContent")
     .isLength({ min: 10, max: 255 })
-    .withMessage(
-      "Your post must be at least 10 characters long and less than 280 characters long"
-    ),
+    .withMessage("Your post must be between 10 and 255 characters long"),
 ];
 
 exports.addPost = [
